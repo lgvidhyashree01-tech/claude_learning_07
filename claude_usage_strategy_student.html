@@ -1,0 +1,245 @@
+
+<h2 class="sr-only">My Claude usage strategy: personalized model and effort recommendations for a student focused on coding, research, and career preparation</h2>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.page { padding: 1.5rem 0; }
+.nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.nav button { padding: 6px 14px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); font-size: 13px; font-weight: 500; cursor: pointer; color: var(--color-text-secondary); background: transparent; transition: all 0.15s; }
+.nav button:hover { background: var(--color-background-secondary); }
+.nav button.on { background: #533AB7; color: #EEEDFE; border-color: #533AB7; }
+.tab { display: none; }
+.tab.on { display: block; }
+.profile-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.pill { display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.pill.purple { background: #EEEDFE; color: #3C3489; }
+.pill.teal { background: #E1F5EE; color: #0F6E56; }
+.pill.blue { background: #E6F1FB; color: #0C447C; }
+.pill.amber { background: #FAEEDA; color: #633806; }
+.sec { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-tertiary); margin-bottom: 10px; margin-top: 20px; }
+.model-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 1rem; }
+.model-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px; background: var(--color-background-primary); }
+.model-card.featured { border: 2px solid #533AB7; }
+.model-badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+.model-badge.primary { background: #EEEDFE; color: #3C3489; }
+.model-badge.secondary { background: #E6F1FB; color: #0C447C; }
+.model-badge.tertiary { background: #F1EFE8; color: #444441; }
+.model-name { font-size: 17px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.model-role { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 10px; }
+.use-list { font-size: 12px; color: var(--color-text-secondary); line-height: 1.7; }
+.use-list li { padding-left: 10px; list-style: none; position: relative; }
+.use-list li::before { content: "•"; position: absolute; left: 0; color: #533AB7; }
+.effort-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1rem; }
+.effort-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px; background: var(--color-background-primary); }
+.effort-label { font-size: 12px; font-weight: 500; margin-bottom: 4px; }
+.effort-when { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.effort-badge { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 3px; margin-bottom: 6px; }
+.wf-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+.wf-item { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; align-items: center; padding: 10px 14px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: var(--color-background-primary); font-size: 13px; }
+.wf-item .task { font-weight: 500; color: var(--color-text-primary); }
+.wf-item .detail { font-size: 12px; color: var(--color-text-secondary); }
+.wf-header { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; padding: 6px 14px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-text-tertiary); }
+.mistake-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+.mistake { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: var(--color-background-primary); }
+.mistake i { color: #D85A30; font-size: 18px; margin-top: 1px; flex-shrink: 0; }
+.mistake-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
+.final-box { background: #EEEDFE; border-radius: var(--border-radius-lg); padding: 20px; text-align: center; }
+.final-title { font-size: 15px; font-weight: 500; color: #3C3489; margin-bottom: 8px; }
+.final-rec { font-size: 24px; font-weight: 500; color: #26215C; margin-bottom: 6px; }
+.final-why { font-size: 13px; color: #533AB7; line-height: 1.6; }
+.ask-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 8px 16px; background: #533AB7; color: #EEEDFE; border: none; border-radius: var(--border-radius-md); font-size: 13px; font-weight: 500; cursor: pointer; }
+</style>
+
+<div class="page">
+  <div class="profile-bar">
+    <span class="pill purple"><i class="ti ti-school" aria-hidden="true"></i> Student</span>
+    <span class="pill teal"><i class="ti ti-code" aria-hidden="true"></i> Coding</span>
+    <span class="pill teal"><i class="ti ti-search" aria-hidden="true"></i> Research</span>
+    <span class="pill teal"><i class="ti ti-briefcase" aria-hidden="true"></i> Career prep</span>
+    <span class="pill blue"><i class="ti ti-calendar" aria-hidden="true"></i> Daily user</span>
+    <span class="pill amber"><i class="ti ti-chart-bar" aria-hidden="true"></i> Deep research outputs</span>
+  </div>
+
+  <div class="nav">
+    <button class="on" onclick="show('models')">Models</button>
+    <button onclick="show('effort')">Effort levels</button>
+    <button onclick="show('workflow')">My workflow</button>
+    <button onclick="show('mistakes')">Mistakes to avoid</button>
+    <button onclick="show('final')">Final pick</button>
+  </div>
+
+  <div id="models" class="tab on">
+    <p class="sec">Recommended primary model</p>
+    <div class="model-grid">
+      <div class="model-card featured">
+        <span class="model-badge primary">Your primary model</span>
+        <div class="model-name">Claude Sonnet 4.6</div>
+        <div class="model-role">Daily workhorse — smart + fast</div>
+        <ul class="use-list">
+          <li>Coding help & debugging</li>
+          <li>Research summaries</li>
+          <li>Resume & cover letters</li>
+          <li>Explaining concepts</li>
+          <li>Study notes & Q&A</li>
+        </ul>
+      </div>
+      <div class="model-card">
+        <span class="model-badge secondary">Step up to this</span>
+        <div class="model-name">Claude Opus 4.7</div>
+        <div class="model-role">Deepest reasoning — for hard problems</div>
+        <ul class="use-list">
+          <li>Complex algorithm design</li>
+          <li>Deep research reports</li>
+          <li>Career strategy advice</li>
+          <li>Architecture decisions</li>
+          <li>Multi-step problem solving</li>
+        </ul>
+      </div>
+      <div class="model-card">
+        <span class="model-badge tertiary">Quick tasks only</span>
+        <div class="model-name">Claude Haiku 4.5</div>
+        <div class="model-role">Fastest — simple lookups</div>
+        <ul class="use-list">
+          <li>Quick definitions</li>
+          <li>Short grammar checks</li>
+          <li>Simple reformatting</li>
+          <li>Fast yes/no questions</li>
+          <li>Flashcard generation</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.6;">Sonnet 4.6 is the right default for you — it handles 90% of student and developer tasks at high quality without needing to reach for Opus every time. Switch to Opus only when you're truly stuck or the task is multi-step and high-stakes.</p>
+  </div>
+
+  <div id="effort" class="tab">
+    <p class="sec">When to use each effort level</p>
+    <div class="effort-grid">
+      <div class="effort-card">
+        <span class="effort-badge" style="background:#F1EFE8; color:#444441;">Low</span>
+        <div class="effort-label" style="color:var(--color-text-primary)">Low effort</div>
+        <div class="effort-when">Quick lookups, syntax reminders, simple definitions. Use when you want speed over depth.</div>
+      </div>
+      <div class="effort-card">
+        <span class="effort-badge" style="background:#E1F5EE; color:#0F6E56;">Standard</span>
+        <div class="effort-label" style="color:var(--color-text-primary)">Standard</div>
+        <div class="effort-when">Your default. Covers 80% of tasks: coding help, summaries, writing, explaining topics.</div>
+      </div>
+      <div class="effort-card">
+        <span class="effort-badge" style="background:#E6F1FB; color:#0C447C;">High</span>
+        <div class="effort-label" style="color:var(--color-text-primary)">High effort</div>
+        <div class="effort-when">Resume polish, deep research papers, complex code review, interview prep answers.</div>
+      </div>
+      <div class="effort-card">
+        <span class="effort-badge" style="background:#EEEDFE; color:#3C3489;">Max</span>
+        <div class="effort-label" style="color:var(--color-text-primary)">Max effort</div>
+        <div class="effort-when">Capstone projects, difficult system design, career-defining documents. Use rarely — quality over speed.</div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:var(--color-text-secondary); margin-top:8px; line-height:1.6;">As a daily student user: <strong>Standard</strong> is your everyday setting. Jump to High for anything that goes on your portfolio or resume. Max is reserved for once-a-week, high-stakes work.</p>
+  </div>
+
+  <div id="workflow" class="tab">
+    <p class="sec">Your personalized daily workflow</p>
+    <div class="wf-header">
+      <span>Task</span><span>Best model</span><span>Effort</span>
+    </div>
+    <div class="wf-row">
+      <div class="wf-item">
+        <div><div class="task">Debug code / fix errors</div><div class="detail">Paste the error + your code</div></div>
+        <div class="detail">Sonnet 4.6</div>
+        <div class="detail">Standard</div>
+      </div>
+      <div class="wf-item">
+        <div><div class="task">Learn a new concept</div><div class="detail">Ask it to explain like you're new</div></div>
+        <div class="detail">Sonnet 4.6</div>
+        <div class="detail">Standard</div>
+      </div>
+      <div class="wf-item">
+        <div><div class="task">Research a topic deeply</div><div class="detail">Literature, tech landscape, comparisons</div></div>
+        <div class="detail">Opus 4.7</div>
+        <div class="detail">High</div>
+      </div>
+      <div class="wf-item">
+        <div><div class="task">Build a project feature</div><div class="detail">Write, review, or refactor code</div></div>
+        <div class="detail">Sonnet 4.6</div>
+        <div class="detail">Standard</div>
+      </div>
+      <div class="wf-item">
+        <div><div class="task">Resume / cover letter</div><div class="detail">Draft or polish career documents</div></div>
+        <div class="detail">Sonnet 4.6</div>
+        <div class="detail">High</div>
+      </div>
+      <div class="wf-item">
+        <div><div class="task">Interview prep</div><div class="detail">Mock questions, answers, feedback</div></div>
+        <div class="detail">Opus 4.7</div>
+        <div class="detail">High</div>
+      </div>
+      <div class="wf-item">
+        <div><div class="task">System / architecture design</div><div class="detail">Plan a full-stack app structure</div></div>
+        <div class="detail">Opus 4.7</div>
+        <div class="detail">Max</div>
+      </div>
+      <div class="wf-item">
+        <div><div class="task">Quick definition or syntax</div><div class="detail">Fast lookup while coding</div></div>
+        <div class="detail">Haiku 4.5</div>
+        <div class="detail">Low</div>
+      </div>
+      <div class="wf-item">
+        <div><div class="task">Capstone / portfolio project</div><div class="detail">End-to-end high-quality work</div></div>
+        <div class="detail">Opus 4.7</div>
+        <div class="detail">Max</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mistakes" class="tab">
+    <p class="sec">Biggest mistakes to avoid</p>
+    <div class="mistake-list">
+      <div class="mistake">
+        <i class="ti ti-alert-circle" aria-hidden="true"></i>
+        <div class="mistake-text"><strong>Using Max effort for everything.</strong> It's slower and consumes more of your usage limits. Standard handles 80% of your daily tasks just fine.</div>
+      </div>
+      <div class="mistake">
+        <i class="ti ti-alert-circle" aria-hidden="true"></i>
+        <div class="mistake-text"><strong>Vague prompts.</strong> "Help me with Python" gets a generic answer. "I'm getting a KeyError on line 12, here's my code: [code]" gets a real fix. Context is everything.</div>
+      </div>
+      <div class="mistake">
+        <i class="ti ti-alert-circle" aria-hidden="true"></i>
+        <div class="mistake-text"><strong>Not iterating.</strong> Claude's first answer is a draft, not a final answer. Push back, ask for improvements, and request a better version.</div>
+      </div>
+      <div class="mistake">
+        <i class="ti ti-alert-circle" aria-hidden="true"></i>
+        <div class="mistake-text"><strong>Skipping Opus for hard problems.</strong> If you've asked Sonnet the same question twice and it still doesn't click — switch to Opus. Don't waste time on the wrong tier.</div>
+      </div>
+      <div class="mistake">
+        <i class="ti ti-alert-circle" aria-hidden="true"></i>
+        <div class="mistake-text"><strong>Copying without understanding.</strong> For coding and research, always ask Claude to explain what it did. You need to understand the output, not just use it.</div>
+      </div>
+      <div class="mistake">
+        <i class="ti ti-alert-circle" aria-hidden="true"></i>
+        <div class="mistake-text"><strong>Starting a new chat for every question.</strong> Claude has no memory between chats. Keep your project conversations in one thread so it has full context throughout.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="final" class="tab">
+    <p class="sec">If you could use only one model + one effort level</p>
+    <div class="final-box">
+      <div class="final-title">Your single best pick</div>
+      <div class="final-rec">Claude Sonnet 4.6 + Standard effort</div>
+      <div class="final-why">You're a daily student user across coding, research, and career prep. Sonnet 4.6 is fast enough for momentum, smart enough for real problems, and won't drain your usage limits. Standard effort keeps responses thorough without slowing you down. When a task truly demands it — switch up to Opus + High. But for your everyday grind, this combo is your 80/20.</div>
+    </div>
+    <button class="ask-btn" onclick="sendPrompt('Give me a sample prompt template I can use daily as a student for coding, research, and career prep with Claude.')">
+      <i class="ti ti-arrow-right" aria-hidden="true"></i> Get my daily prompt templates ↗
+    </button>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  event.target.classList.add('on');
+}
+</script>
