@@ -1,0 +1,24 @@
+What You Learned Today (Day 07)
+1. The Power of Context in Prompting
+You learned the difference between a generic prompt (Prompt A) and a context-rich prompt (Prompt B). The core lesson: 30 seconds of context transforms Claude from a content generator into a personal advisor.
+2. Prompt Engineering Principles
+
+Placeholders like [Student] are not context — filled-in details are
+Context anchors every decision: which projects, which resources, what to skip
+More specific input = more personalized, actionable output
+
+3. Claude Model Tiers
+You explored all three Claude models and when to use each:
+
+Haiku 4.5 → Fast, simple tasks
+Sonnet 4.6 → Daily workhorse (your primary model)
+Opus 4.7 → Deep reasoning, hard problems
+
+4. Effort Levels in Claude
+Low / Standard / High / Max — and when to switch based on task importance.
+
+5. Building a Personalized 30-Day Learning Roadmap
+You saw how a roadmap shifts when built around your real profile (student, HTML/CSS done, JS next, job goal) versus a generic one.
+
+6. Claude Usage Strategy
+You built your own Claude usage strategy: which model to use for which task, when to increase effort, and the biggest mistakes to avoid.
